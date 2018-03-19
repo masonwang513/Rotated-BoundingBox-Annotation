@@ -114,21 +114,14 @@ namespace Anotation_Tool
             this.corners[(ind + 3) % 4] = prjpt2;
             // update the shifted point itself
             this.corners[ind] = pt;
+            // reorder
+             this.corners = reOderPoints(this.corners);
             // update width, length
-            double dis1 = PA.Norm(corners[1], corners[0]);
-            double dis2 = PA.Norm(corners[1], corners[2]);
-            if (dis1 >= dis2)
-            {
-                this.length = dis1;
-                this.width = dis2;
-                this.angle = Math.Atan2(corners[1].Y - corners[0].Y, corners[1].X - corners[0].X) / Math.PI * 180;
-            }
-            else
-            {
-                this.length = dis2;
-                this.width = dis1;
-                this.angle = Math.Atan2(corners[2].Y - corners[1].Y, corners[2].X - corners[1].X) / Math.PI * 180;
-            }
+            this.length = PA.Norm(this.corners[0], this.corners[1]);
+            this.width = PA.Norm(this.corners[0], this.corners[3]);
+            this.angle = Math.Atan2(this.corners[1].Y - this.corners[0].Y,
+                                    this.corners[1].X - this.corners[0].X) / Math.PI * 180;
+            this.angle = this.angle > 90 ? this.angle - 180 : this.angle; // (-90, 90]  
             // update the center of new rotated rect
             int xc = 0, yc = 0;
             for (int i = 0; i < 4; i++)
