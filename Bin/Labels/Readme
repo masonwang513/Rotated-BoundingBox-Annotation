@@ -1,1 +1,5 @@
-Generated label information will be stored in this folder. One txt file will be produced for each of labeled images, and they have same fileName. 
+Generated label information will be stored in this folder. One txt file will be produced for each of labeled images. 
+
+Each line of txt file stands for a rotated retangle, including 4 points and 1 rotation angle, stored in the following form:
+pt1.x pt1.y ... pt4.x pt4.y angle
+
